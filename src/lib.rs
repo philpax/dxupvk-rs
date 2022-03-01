@@ -48,12 +48,6 @@ fn jc2_direct_hook() -> anyhow::Result<()> {
         DETOURS = Some(detours);
     }
 
-    // JC2 attempts to call Nvidia-specific device creation if it detects a Nvidia card.
-    // We don't want that, so let's change the conditional jump to an unconditional one.
-    safe_write(0x9385C7 as *mut _, 0xEBu8);
-    // Similarly, disable stereo vision.
-    safe_write(0x938FC8 as *mut _, 0xEBu8);
-
     Ok(())
 }
 

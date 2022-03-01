@@ -1,3 +1,11 @@
+# dxupvk-rs
+
+A *extremely* modified version of DXVK for the purpose of making Just Cause 2 run on DX11. Doesn't actually feature any Vulkan.
+
+Builds with Rust as it's used in a larger Rust project.
+
+Original readme follows...
+
 # DXVK
 
 A Vulkan-based translation layer for Direct3D 9/10/11 which allows running 3D applications on Linux using Wine.
@@ -129,7 +137,7 @@ update-alternatives --config x86_64-w64-mingw32-g++
 update-alternatives --config i686-w64-mingw32-gcc
 update-alternatives --config i686-w64-mingw32-g++
 ```
-For non debian based distros, make sure that your mingw-w64-gcc cross compiler 
+For non debian based distros, make sure that your mingw-w64-gcc cross compiler
 does have `--enable-threads=posix` enabled during configure. If your distro does
 ship its mingw-w64-gcc binary with `--enable-threads=win32` you might have to
-recompile locally or open a bug at your distro's bugtracker to ask for it. 
+recompile locally or open a bug at your distro's bugtracker to ask for it.

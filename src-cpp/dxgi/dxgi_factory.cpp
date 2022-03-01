@@ -58,11 +58,6 @@ namespace dxvk {
           IUnknown*             pDevice,
           DXGI_SWAP_CHAIN_DESC* pDesc,
           IDXGISwapChain**      ppSwapChain) {
-    auto mb = [](std::string const& str) {
-      MessageBoxA(nullptr, str.c_str(), str.c_str(), MB_OK);
-    };
-    mb(std::to_string((size_t)pDevice));
-
     if (ppSwapChain == nullptr || pDesc == nullptr || pDevice == nullptr)
       return DXGI_ERROR_INVALID_CALL;
 

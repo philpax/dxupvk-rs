@@ -12,7 +12,6 @@ namespace dxvk {
 
   DxgiSwapChain::~DxgiSwapChain() {}
 
-
   HRESULT STDMETHODCALLTYPE DxgiSwapChain::QueryInterface(REFIID riid, void** ppvObject) {
     if (ppvObject == nullptr)
       return E_POINTER;

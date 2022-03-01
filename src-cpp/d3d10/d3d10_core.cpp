@@ -1,8 +1,10 @@
 #include <d3d11.h>
 #include <d3d10_1.h>
 
-#include "../dxgi/dxgi_include.h"
 #include "d3d10_device.h"
+
+#include "../dxgi/dxgi_include.h"
+#include "../dxgi/dxgi_adapter.h"
 
 extern "C" {
   using namespace dxvk;
@@ -26,6 +28,12 @@ extern "C" {
     InitReturnPtr(ppDevice);
 
     Com<ID3D11Device> d3d11Device;
+
+    // hack: make sure we're dealing with the OG adapter when passing it into DX
+    DxgiAdapter* ourAdapter = nullptr;
+    if (pAdapter->QueryInterface(&ourAdapter) == S_OK) {
+      pAdapter = ourAdapter->GetOriginalAdapter();
+    }
 
     HRESULT hr = pAdapter->CheckInterfaceSupport(
       __uuidof(ID3D10Device), nullptr);

@@ -1,5 +1,6 @@
 #include "dxgi_factory.h"
 #include "dxgi_swapchain.h"
+#include "dxgi_adapter.h"
 
 #include "../d3d10/d3d10_device.h"
 
@@ -78,7 +79,17 @@ namespace dxvk {
   HRESULT STDMETHODCALLTYPE DxgiFactory::EnumAdapters(
           UINT            Adapter,
           IDXGIAdapter**  ppAdapter) {
-    return m_factory->EnumAdapters(Adapter, ppAdapter);
+    if (ppAdapter)
+      *ppAdapter = nullptr;
+
+    IDXGIAdapter* originalAdapter = nullptr;
+    HRESULT hr = m_factory->EnumAdapters(Adapter, &originalAdapter);
+    if (originalAdapter) {
+      Com<IDXGIAdapter> ourAdapter = new DxgiAdapter(originalAdapter, this);
+      if (ppAdapter)
+        *ppAdapter = ourAdapter.ref();
+    }
+    return hr;
   }
 
 
